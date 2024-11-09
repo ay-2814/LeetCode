@@ -1,0 +1,70 @@
+Problem Statement:
+-------------------
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+You can return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+Example 2:
+
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+Example 3:
+
+Input: nums = [3,3], target = 6
+Output: [0,1]
+
+
+Solution:
+----------
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        # Approach 1: Brute force
+        # Check every number combination, since there is exactly one solution
+        # return that solution whence its found
+
+        # sum = start = end = 0
+
+        # for i in range(len(nums)-1):
+        #     # print("i:",i)
+        #     # print(nums[i])
+        #     for j in range(i+1,len(nums)):
+        #         sum = nums[i]
+        #         # print("j:",j)
+        #         sum += nums[j]
+        #         if sum==target:
+        #             print(sum)
+        #             print("sum equals target found")
+        #             start = i
+        #             end = j
+        #             return [i,j]
+            
+        # Approach 2
+        # Hashmap
+        # Add the number only when we have visited the array
+        nums_visited = {} # 
+
+        for ind, num in enumerate(nums):
+            # Calculate the diff between target and num
+            diff = target - num
+            # Check if number exists already in the list
+            if diff in nums_visited:
+                return [nums_visited[diff],ind]
+            # Add the number into the hashmap
+            nums_visited[num] = ind
+
+
+
+
+Learnings:
+----------
+- Hashmap to store number and values
+- calc diff and check if it exists in the list already
