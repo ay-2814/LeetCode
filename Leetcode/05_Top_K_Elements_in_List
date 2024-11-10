@@ -1,0 +1,66 @@
+Problem Statement:
+-------------------
+Given an integer array nums and an integer k, return the k most frequent elements within the array.
+
+The test cases are generated such that the answer is always unique.
+
+You may return the output in any order.
+
+Example 1:
+
+Input: nums = [1,2,2,3,3,3], k = 2
+
+Output: [2,3]
+Example 2:
+
+Input: nums = [7,7], k = 1
+
+Output: [7]
+
+Constraints:
+
+1 <= nums.length <= 10^4.
+-1000 <= nums[i] <= 1000
+1 <= k <= number of distinct elements in nums.
+
+
+Solution:
+---------
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+
+        # Step 1, make a dict/HashMap of all the numbers and their frequency -> number : frequency
+        count_num = {}
+        for num in nums:
+            count_num[num] = 1 + count_num.get(num, 0)
+        # Check print
+        # print(count_num)
+
+        # Step 2, make a dict/HashMap of the freq where index is freq and val is a list of all the numbers with that frequency
+        freq = [[] for i in range(len(nums) + 1)]
+        # print(len(freq), len(freq[0]))
+        for num, cnt in count_num.items():
+            # print(num, cnt)
+            freq[cnt].append(num)
+        
+        print("len freq:",len(freq))
+        # Step 3, traverse that list in step 2 backward till k values
+        res = []
+        for i in range(len(freq) - 1,0, -1):
+            # print(i)
+            for num in freq[i]:
+                res.append(num)
+                if len(res) == k:
+                    return res
+
+       
+
+Learnings:
+----------
+- HashMap to count the numbers, number:freq
+- Another HashMap to store frequency as index and the numbers that have those frequencies as value, freq : list of numbers
+- range(len(freq) - 1, 0, -1) : len(freq) does not work because that would be index out of range as the beginning value is included
+- 0 because the last value is excluded so it runs till 1 which is what we need because the freq[0] is always empty by the logic we use to fill it
+- -1 because we are traversing the list in reverse direction
+- don't forget to check when len(res) == k and then exit
+
