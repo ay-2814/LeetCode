@@ -1,0 +1,62 @@
+Problem Statement:
+------------------
+Is Anagram
+
+Given two strings s and t, return true if the two strings are anagrams of each other, otherwise return false.
+
+An anagram is a string that contains the exact same characters as another string, but the order of the characters can be different.
+
+Example 1:
+
+Input: s = "racecar", t = "carrace"
+
+Output: true
+Example 2:
+
+Input: s = "jar", t = "jam"
+
+Output: false
+Constraints:
+
+s and t consist of lowercase English letters
+
+Solution:
+--------
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        # Approach 1: checking if the sorted strings are same
+        # s = sorted(s)
+        # t = sorted(t)
+
+        # if (s==t):
+        #     return True
+        # return False
+
+        # Approach 2: Hashmap
+        if len(s)!= len(t):
+            print("False due to length mismatch")
+            return False
+        
+        countS, countT = {},{}
+
+        for i in range(len(s)):
+            print("current characters :", s[i], t[i])
+            countS[s[i]] = 1 + countS.get(s[i], 0)
+            print("current S: ", countS )
+            countT[t[i]] = 1 + countT.get(t[i], 0)
+            print("current T: ", countT)
+        
+        print(countS, countT)
+
+        for c in countS:
+            if countS[c] != countT.get(c,0):
+                print("False due to character mismatch")
+                return False
+
+        
+        return True
+        
+
+Learnings:
+----------
+- .get helps avoid key errors in Hashmaps
