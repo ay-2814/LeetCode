@@ -1,0 +1,58 @@
+Problem Statement: 
+-------------------
+Design an algorithm to encode a list of strings to a single string. The encoded string is then decoded back to the original list of strings.
+
+Please implement encode and decode
+
+Example 1:
+
+Input: ["neet","code","love","you"]
+
+Output:["neet","code","love","you"]
+Example 2:
+
+Input: ["we","say",":","yes"]
+
+Output: ["we","say",":","yes"]
+
+Constraints:
+0 <= strs.length < 100
+0 <= strs[i].length < 200
+strs[i] contains only UTF-8 characters.
+
+
+Solution:
+---------
+class Solution:
+
+    def encode(self, strs: List[str]) -> str:
+        res = ""
+        for string in strs:
+            # print(string)
+            res += str(len(string)) + "," + string
+            print("res_encode:", res)
+        return res
+
+    def decode(self, s: str) -> List[str]:
+        res = []
+        i = 0 # pointer for where we are in string
+        while i < len(s):
+            j = i # second pointer
+            while s[j] != ',': # our delimeter is ','
+                j += 1
+            length = int(s[i:j])
+            print(s[i:j], int(s[i:j]), len(s[i:j]))
+            # length = len(s[i:j]) # why is this wrong
+            # its wrong because s[i:j] in this condition woudl contain the number of letters
+            res.append(s[j+1 : j + 1 + length])
+            i = j + 1 + length
+        return res
+
+
+
+Learnings:
+----------
+- Encode the string with number of characters and a delimeter
+
+
+
