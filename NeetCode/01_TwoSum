@@ -50,7 +50,7 @@ class Solution:
         # Approach 2
         # Hashmap
         # Add the number only when we have visited the array
-        nums_visited = {} # 
+        nums_visited = {} # To store the number as key, and its index as value
 
         for ind, num in enumerate(nums):
             # Calculate the diff between target and num

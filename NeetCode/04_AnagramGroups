@@ -57,6 +57,27 @@ class Solution:
         return list(res.values())
             
 
+
+Solution Try 2:
+----------------
+
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+
+        anagram_groups = defaultdict(list) # Key = list of character count # Value = list of string with that character count 
+
+       
+
+        # Count the characters in each string
+        for s in strs:
+            # since strs[i] is made up of lowercase English letters.
+            count_char = [0] * 26
+            for char in s:
+                count_char[ord(char) - ord('a')] += 1
+            # print(f"count_char for {s} is {count_char}")
+            anagram_groups[tuple(count_char)].append(s)
+        return(anagram_groups.values())
+
         
 
 Learnings:

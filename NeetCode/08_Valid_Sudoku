@@ -1,0 +1,65 @@
+Problem Statement:
+------------------
+You are given a a 9 x 9 Sudoku board board. A Sudoku board is valid if the following rules are followed:
+
+Each row must contain the digits 1-9 without duplicates.
+Each column must contain the digits 1-9 without duplicates.
+Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without duplicates.
+Return true if the Sudoku board is valid, otherwise return false
+
+Note: A board does not need to be full or be solvable to be va
+
+Solution:
+---------
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+
+        # Approach 1, checks 2/3 i.e. row and col repition
+        # isValid = True
+
+        # for row in board:
+        #     for i in range(0, len(row)-1):
+        #         for j in range(i+1, len(row)):
+        #             if (row[j] != '.') and (row[i] == row[j]):
+        #                 isValid = False
+        #                 return isValid
+        
+        # board_transpose = [element for element in zip(*board)]
+        # print(board_transpose)
+        
+        # for row in board_transpose:
+        #     for i in range(0, len(row)-1):
+        #         for j in range(i+1, len(row)):
+        #             if (row[j] != '.') and (row[i] == row[j]):
+        #                 isValid = False
+        #                 return isValid
+
+        # return isValid
+
+        # Approach 2: HashSet
+
+        col = defaultdict(set)
+        row = defaultdict(set)
+        squares = defaultdict(set)
+
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                if board[r][c] == ".":
+                    continue
+                if ((board[r][c] in row[r]) or (board[r][c] in col[c])
+                 or (board[r][c] in squares[(r//3, c//3)])):
+                    return False
+                row[r].add(board[r][c])
+                col[c].add(board[r][c])
+                squares[(r//3, c//3)].add(board[r][c])
+        return True
+            
+                
+
+Time Complexity: O(n2)
+Space complexity : O(n2)
+
+Learnigns:
+----------
+- Square technique for converting 9X9 grids into 3X3 grids
+
