@@ -47,9 +47,27 @@ Solution - Approach 2:
                 return True
             seen_nums.add(num)
         return False
+
+Solution - Approach 3 (31st Jan 2025):
+--------------------------------------
+# Approach 3 - While traversing the list, Checking to see if the number exists in the hashmap, esle adding the numbers in the hashMap
+
+class Solution:
+    def hasDuplicate(self, nums: List[int]) -> bool:
+
+        num_map = {}
+
+        for num in nums:
+            if num in num_map:
+                return True
+            else:
+                num_map[num] = 1 + num_map.get(num, 0)
+        
+        return False 
          
 
-Learnings:
------------
+Learnings (Updated 31st Jan 2025):
+----------------------------------
 - set is created from list using set(list_name)
 - set length and list length can be found using len()
+- 
